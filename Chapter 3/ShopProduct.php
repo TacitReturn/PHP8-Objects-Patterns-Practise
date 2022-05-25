@@ -2,23 +2,38 @@
 
 	class ShopProduct
 	{
-		public $title;
-		public $producerFirstName;
-		public $producerMainName;
-		protected $price;
-		public $discount;
+		private int|float $discount = 0;
 
-		public function __construct(string $title, string $producerFirstName, string $producerMainName, float $price)
+		public function __construct(
+			private string $title, 
+			private string $producerFirstName, 
+			private string $producerMainName, 
+			protected int|float $price)
+		{}
+
+		public function getProducerFirstName(): string
 		{
-			$this->title = $title;
-			$this->producerFirstName = $producerFirstName;
-			$this->producerMainName = $producerMainName;
-			$this->price = $price;
+			return $this->producerFirstName;
 		}
 
-		public function setDiscount(int $num): void
+		public function getProducerMainName(): string
+		{
+			return $this->producerMainName;
+		}
+
+		public function setDiscount(int|float $num): void
 		{
 			$this->discount = $num;
+		}
+
+		public function getDiscount(): int
+		{
+			return $this->discount;
+		}
+
+		public function getTitle(): string
+		{
+			return $this->title;
 		}
 
 		public function getPrice(): int|float
@@ -26,7 +41,7 @@
 			return ($this->price - $this->discount);
 		}
 
-		public function getProducer (): string
+		public function getProducer(): string
 		{
 			return "{$this->producerFirstName} {$this->producerMainName}";
 		}
@@ -41,14 +56,13 @@
 
 	class CdProduct extends ShopProduct
 	{
-		public $playLength;
-
-		public function __construct(string $title, string $firstName, string $mainName, float $price, int $playLength)
+		public function __construct(string $title, string $firstName, string $mainName, int|float $price, private int $playLength)
 		{
 			parent::__construct($title, $firstName, $mainName, $price);
 
 			$this->playLength = $playLength;
 		}
+
 		public function getPlayLength(): int
 		{
 			return $this->playLength;
@@ -65,20 +79,13 @@
 
 	class BookProduct extends ShopProduct
 	{
-		public $numPages;
-
-		public function __construct(string $title, string $firstName, string $mainName, float $price, int $numPages)
+		public function __construct(string $title, string $firstName, string $mainName, int|float $price, private int $numPages)
 		{
 			parent::__construct($title, $firstName, $mainName, $price);
 
 			$this->numPages = $numPages;
 		}
-
-		public function getPrice (): int|float
-		{
-			return $this->price;
-		}
-
+		
 		public function getNumberOfPages(): int
 		{
 			return $this->numPages;
@@ -91,6 +98,12 @@
 
 			return $base;
 		}
+		
+		public function getPrice (): int|float
+		{
+			return $this->price;
+		}
+
 	}
 
 	class ShopProductWriter
@@ -101,13 +114,14 @@
 		{
 			$this->products[] = $shopProduct;
 		}
+
 		public function write(): void
 		{
 			$str = "";
 
 			foreach ($this->products as $shopProduct)
 			{
-				$str .= "$shopProduct->title: ";
+				$str .= "$shopProduct->getTitle(): ";
 				$str .= "{$shopProduct->getProducer()} ";
 				$str .= "{$shopProduct->getPrice()} \n";
 			}
@@ -119,14 +133,18 @@
 	$product4 = new CdProduct("Exile On Coldharbour Lane", "The", "Alabama 3", 10.99, 55.00);
 	print PHP_EOL;
 	$product5 = new CdProduct("Lorem Ipsum Band", "The", "Alabama 3", 12.99, 100.75);
-//	$newShopProduct = new ShopProduct("Lorem Ipsum", "Ipsum Producer", "Ipsum Producer LLC", 100);
-//
-//	$newBookProduct = new BookProduct("Catcher In The Rye", "JD", "Salanger", 25.75, 375);
+
+	TODO:// fix error on ShopProduct title.
+	$newShopProduct = new ShopProduct("Lorem Ipsum", "Ipsum Producer", "Ipsum Producer LLC", 100);
+
+	$newBookProduct = new BookProduct("Catcher In The Rye", "JD", "Salanger", 25.75, 375);
 
 	$writer = new ShopProductWriter();
-	$writer->addProduct($product4);
-	$writer->addProduct($product5);
-//
+	// $writer->addProduct($product4);
+	// $writer->addProduct($product5);
+
+	$writer->addProduct($newShopProduct);
+
 	$writer->write();
 
 
