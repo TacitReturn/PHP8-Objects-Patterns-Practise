@@ -1,0 +1,12 @@
+{
+    "name": "glenn/php8objects-patterns-practise",
+    "description": "Mastering OO Enhancements, Design Patterns and Essential Development Tools",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Glenn\\Php8objectsPatternsPractise\\": "src/"
+        }
+    },
+    "require": {}
+}

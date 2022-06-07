@@ -121,7 +121,7 @@
 
 			foreach ($this->products as $shopProduct)
 			{
-				$str .= "$shopProduct->getTitle(): ";
+				$str .= "{$shopProduct->getTitle()}: ";
 				$str .= "{$shopProduct->getProducer()} ";
 				$str .= "{$shopProduct->getPrice()} \n";
 			}
@@ -130,30 +130,33 @@
 		}
 	}
 
-	$product4 = new CdProduct("Exile On Coldharbour Lane", "The", "Alabama 3", 10.99, 55.00);
-	print PHP_EOL;
-	$product5 = new CdProduct("Lorem Ipsum Band", "The", "Alabama 3", 12.99, 100.75);
-
-	TODO:// fix error on ShopProduct title.
-	$newShopProduct = new ShopProduct("Lorem Ipsum", "Ipsum Producer", "Ipsum Producer LLC", 100);
-
-	$newBookProduct = new BookProduct("Catcher In The Rye", "JD", "Salanger", 25.75, 375);
+	$newShopProduct = new ShopProduct("title", "producer first name", "producer main name", 100.75);
 
 	$writer = new ShopProductWriter();
-	// $writer->addProduct($product4);
-	// $writer->addProduct($product5);
 
 	$writer->addProduct($newShopProduct);
 
+
 	$writer->write();
+	
+	print(PHP_EOL);
+
+	$newCDProduct = new CdProduct("Exile On Coldharbour Lane", "The", "Alabama 3", 10.99, 55.00);
+
+	print(PHP_EOL);
+
+	$writer2 = new ShopProductWriter();
+
+	$writer2->addProduct($newCDProduct);
+
+	$writer2->write();
+
+	$product5 = new CdProduct("Lorem Ipsum Band", "The", "Alabama 3", 12.99, 100.75);
+
+	TODO:// fix error on ShopProduct title.
 
 
-//	$product4->setDiscount(1.75);
-////	print $product4->getPrice() . PHP_EOL;
-//	print $product4->getPrice();
-//
-//	$newShopProduct = new ShopProduct("Lorem Ipsum", "Ipsum Producer", "Ipsum Producer LLC", 100);
-//
-//	$newBookProduct = new BookProduct("Catcher In The Rye", "JD", "Salanger", 25.75, 375);
-//
-//	print $newBookProduct->getPrice();
+	$newBookProduct = new BookProduct("Catcher In The Rye", "JD", "Salanger", 25.75, 375);
+
+
+
