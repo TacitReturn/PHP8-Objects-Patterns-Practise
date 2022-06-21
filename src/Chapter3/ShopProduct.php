@@ -1,5 +1,7 @@
 <?php
 
+    namespace App\Chapter3;
+
 	class ShopProduct
 	{
 		private int|float $discount = 0;
@@ -129,34 +131,6 @@
 			print $str;
 		}
 	}
-
-	$newShopProduct = new ShopProduct("title", "producer first name", "producer main name", 100.75);
-
-	$writer = new ShopProductWriter();
-
-	$writer->addProduct($newShopProduct);
-
-
-	$writer->write();
-	
-	print(PHP_EOL);
-
-	$newCDProduct = new CdProduct("Exile On Coldharbour Lane", "The", "Alabama 3", 10.99, 55.00);
-
-	print(PHP_EOL);
-
-	$writer2 = new ShopProductWriter();
-
-	$writer2->addProduct($newCDProduct);
-
-	$writer2->write();
-
-	$product5 = new CdProduct("Lorem Ipsum Band", "The", "Alabama 3", 12.99, 100.75);
-
-	TODO:// fix error on ShopProduct title.
-
-
-	$newBookProduct = new BookProduct("Catcher In The Rye", "JD", "Salanger", 25.75, 375);
 
 
 
