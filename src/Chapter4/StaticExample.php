@@ -30,3 +30,13 @@
             print("hello (" . self::$aNum . ")\n");
         }
     }
+
+    $staticExample = new StaticExample();
+
+    $staticExample2 = new StaticExample2();
+
+    $staticExample2::$aNum;
+
+    $staticExample2::sayHello();
+    $staticExample2::sayHello();
+    $staticExample2::sayHello();

@@ -39,5 +39,22 @@
     print \App\Chapter4\StaticExample::$aNum;
     echo PHP_EOL;
 
-    echo StaticExample::sayHello() . PHP_EOL;
+    // echo StaticExample::sayHello() . PHP_EOL;
     echo StaticExample2::sayHello() . PHP_EOL;
+
+    try {
+        $user = "root";
+        $pass = "root";
+        $pdo = new PDO('mysql:host=localhost;dbname=PHP8Objects', $user, $pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        print "Database connected.." . PHP_EOL;
+
+        $obj = ShopProduct::getInstance(2, $pdo);
+
+        print $obj;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . PHP_EOL;
+    }
+
+
+    
